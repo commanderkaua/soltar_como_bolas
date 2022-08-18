@@ -24,15 +24,20 @@ function setup() {
 
 
 	engine = Engine.create();
-	Engine.update(engine);
 	world = engine.world;
+	
 
 var plane_options ={
 
 		is_Static: true
 	};
 
-bola1 = Bodies.circle(300,50,30);
+var BALL_options ={
+
+	isStatic:false
+};
+
+bola1 = Bodies.circle(300,50,30, BALL_options);
 World.add(world,bola1);
 chao = Bodies.rectangle(400,600,600,30, plane_options);
 World.add(world,chao);
@@ -54,6 +59,8 @@ World.add(world,rotator3);
 
 function draw() {
 
+		Engine.update(engine);
+
 	Matter.Body.rotate(rotator1, angle1);
 	push();
 	translate(rotator1.position.x, rotator1.position.y);
@@ -62,32 +69,17 @@ function draw() {
 	pop();
 	angle1 +=0.2;
 	
-	Matter.Body.rotate(rotator2, angle2);
-	push();
-	translate(rotator2.position.x, rotator2.position.y);
-	rotate(angle2);
-	rect(0,0,140,20);
-	pop();
-	angle2 +=0.4;
 	
-	Matter.Body.rotate(rotator3, angle3);
-	push();
-	translate(rotator3.position.x, rotator3.position.y);
-	rotate(angle3);
-	rect(0,0,140,20);
-	pop();
-	angle3 +=0.6;
 
   rectMode(CENTER);
   background("yellow");
-  ellipse(bola1.position.x, bola1.position.y, 30);
-  rect(chao.position.x, chao.position.y, 800,40);
+  ellipse(bola1.position.x, bola1.position.y, 30);  
   rect(block1.position.x, block1.position.y, 170,20);
   rect(block2.position.x, block2.position.y, 170,20);
   rect(rotator1.position.x, rotator1.position.y, 140,20);
   rect(rotator2.position.x, rotator2.position.y, 140,20);
   rect(rotator3.position.x, rotator3.position.y, 140,20);
-
+  rect(chao.position.x, chao.position.y, 600,30);
   drawSprites();
  
 }
